@@ -171,13 +171,14 @@ contains
   subroutine gfx_draw_grid_object(obj)
     class(gfx_grid_object), intent(in) :: obj
 
+    real(c_float) :: eps = 1e-6_c_float
     real(c_float) :: vrange(2)
     real(c_float) :: x1, y1, x2, y2
     real(c_float) :: color
     integer :: i, j
 
     if (obj%autorange) then
-      vrange = [minval(obj%grid)+minval(obj%grid)*0.001, maxval(obj%grid)-maxval(obj%grid)*0.001]
+      vrange = [minval(obj%grid)-abs(minval(obj%grid)*eps), maxval(obj%grid)+abs(maxval(obj%grid)*eps)]
     else
       vrange = obj%vrange
     end if
