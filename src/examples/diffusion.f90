@@ -16,23 +16,29 @@ program diffusion_demo
   implicit none
 
   type(gfx_scene) :: gfx
-  logical :: should_close
 
   real(real64), parameter :: dx = 0.1_real64, dt=1.0_real64
   real(real64), parameter :: L = 10
-  integer,      parameter :: n_steps_per_frame = 10
+  integer,      parameter :: n_steps_per_frame = 1000
   integer,      parameter :: resolution(2) = [1280,720]
   integer,      parameter :: nx = L / dx
   integer,      parameter :: ny = int(L * (real(resolution(2),kind=real64)/resolution(1)) / dx)
 
   real(real64), allocatable :: grid(:,:)
-  integer :: i, j
+  integer :: i
 
   gfx = gfx_init(width=resolution(1), height=resolution(2), title="Fortran visualization")
 
 
   allocate(grid(nx,ny))
-  call gfx_add_grid_object(gfx, grid, vmax=600.0_real64, vmin=300.0_real64)
+  call gfx_add_grid_object(gfx, grid, vrange = [0.0_real64, 600.0_real64])
+
+  call gfx_add_line_object(gfx, real([55,10],kind=real64), real([55,110],kind=real64),                    &
+                                real([1,resolution(1)],kind=real64), real([1,resolution(2)],kind=real64), &
+                                [0.0_real64,1.0_real64,0.0_real64])
+  call gfx_add_line_object(gfx, real([10,55],kind=real64), real([110,55],kind=real64),                    &
+                                real([1,resolution(1)],kind=real64), real([1,resolution(2)],kind=real64), &
+                                [1.0_real64,0.0_real64,1.0_real64])
 
   grid = 300
 

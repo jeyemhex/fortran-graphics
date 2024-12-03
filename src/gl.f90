@@ -13,11 +13,21 @@ module gl
 
   public
 
+  integer(c_int), parameter :: GL_POINTS          = 0
+  integer(c_int), parameter :: GL_LINES           = 1
+  integer(c_int), parameter :: GL_LINE_LOOP       = 2
+  integer(c_int), parameter :: GL_LINE_STRIP      = 3
+  integer(c_int), parameter :: GL_TRIANGLES       = 4
+  integer(c_int), parameter :: GL_TRIANGLE_STRIP  = 5
+  integer(c_int), parameter :: GL_TRIANGLE_FAN    = 6
+  integer(c_int), parameter :: GL_QUADS           = 7
+  integer(c_int), parameter :: GL_QUAD_STRIP      = 8
+  integer(c_int), parameter :: GL_POLYGON         = 9
+
+  integer(c_int), parameter :: GL_MODELVIEW   = 5888
+  integer(c_int), parameter :: GL_PROJECTION  = 5889
+
   integer(c_int), parameter :: GL_COLOR_BUFFER_BIT = 16384
-  integer(c_int), parameter :: GL_MODELVIEW = 5888
-  integer(c_int), parameter :: GL_PROJECTION = 5889
-  integer(c_int), parameter :: GL_TRIANGLES = 4
-  integer(c_int), parameter :: GL_QUADS = 7
 
 
   interface
@@ -125,6 +135,11 @@ module gl
       real(c_float), value :: x, y, z
     end subroutine glScalef
 
+    subroutine glLineWidth(width) bind(C, name='glLineWidth')
+      use iso_c_binding
+      implicit none
+      real(c_float) :: width
+    end subroutine glLineWidth
   end interface
 
 end module gl
