@@ -177,7 +177,7 @@ contains
     integer :: i, j
 
     if (obj%autorange) then
-      vrange = [minval(obj%grid)-minval(obj%grid)*0.001, maxval(obj%grid)+maxval(obj%grid)*0.001]
+      vrange = [minval(obj%grid)+minval(obj%grid)*0.001, maxval(obj%grid)-maxval(obj%grid)*0.001]
     else
       vrange = obj%vrange
     end if
